@@ -1,1 +1,1 @@
-# Kubernetes-From-Scratch---Hands-on-Arabic-
+# Kubernetes From Scratch - Hands-on (Arabic)
