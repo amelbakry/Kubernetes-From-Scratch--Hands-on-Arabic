@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: flask-app
+  name: flask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - image: aelbakry/flask-app:v1.0.2
+        name: flask-app
+        resources: {}
+        env:
+        - name: ENV
+          value: Kubernetes
+status: {}
