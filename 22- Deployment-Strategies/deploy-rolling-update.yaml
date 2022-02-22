@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-rolling-update
+  labels:
+    app: alpine
+spec:
+  revisionHistoryLimit: 5
+  minReadySeconds: 10
+  replicas: 10
+  selector:
+    matchLabels:
+      app: alpine
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 3
+      maxSurge: 3
+  template:
+    metadata:
+      labels:
+        app: alpine
+    spec:
+      containers:
+      - name: alpine
+        image: alpine:3.2
+        command: ['sh', '-c', 'echo The app is Running! && sleep 3600']

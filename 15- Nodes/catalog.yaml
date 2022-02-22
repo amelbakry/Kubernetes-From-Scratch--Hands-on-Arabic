@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog
+  labels:
+    app: catalog
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: catalog
+  template:
+    metadata:
+      labels:
+        app: catalog
+    spec:
+      containers:
+      - name: catalog
+        image: nginx:1.14.2
+        command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+        resources:
+          limits:
+            cpu: "300m"
+            memory: 200Mi
+          requests:
+            cpu: "200m"
+            memory: 100Mi

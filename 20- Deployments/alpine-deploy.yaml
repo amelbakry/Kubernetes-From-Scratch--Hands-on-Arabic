@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-deploy
+  labels:
+    app: test
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      containers:
+      - name: alpine
+        image: alpine:3.2
+        command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+        resources:
+          limits:
+            cpu: "300m"
+            memory: 200Mi
+          requests:
+            cpu: "50m"
+            memory: 100Mi

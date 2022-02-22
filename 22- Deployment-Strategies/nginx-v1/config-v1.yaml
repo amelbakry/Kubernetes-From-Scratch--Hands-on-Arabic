@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-v1
+data:
+  index.html: |
+    <html>
+    <h1>Welcome To Nginx</h1>
+    </br>
+    <h1>Hi! This is V1 of the application </h1>
+    </html

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-recreate
+  labels:
+    app: alpine
+spec:
+  revisionHistoryLimit: 5
+  minReadySeconds: 10
+  replicas: 10
+  selector:
+    matchLabels:
+      app: alpine
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: alpine
+    spec:
+      containers:
+      - name: alpine
+        image: alpine:3.2
+        command: ['sh', '-c', 'echo The app is Ready! && sleep 3600']

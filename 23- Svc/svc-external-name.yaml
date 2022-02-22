@@ -1,0 +1,9 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: svc-external-name
+spec:
+  type: ExternalName
+  externalName: www.google.com
+  ports:
+  - port: 80

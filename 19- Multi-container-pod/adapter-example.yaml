@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: adapter-container-demo
+  labels:
+    app: adapter-container-demo
+spec:
+  volumes:
+  - name: logs
+    emptyDir: {}
+  containers:
+    - name: main-app
+      image: alpine
+      command: ["/bin/sh"]
+      args: ["-c", "while true; do date >> /var/log/app.log; sleep 1;done"]
+      volumeMounts:
+      - name: logs
+        mountPath: /var/log
+    - name: log-adapter
+      image: alpine
+      command: ["/bin/sh"]
+      args: ["-c", "tail -f /var/log/app.log|sed -e 's/^/Date /' > /var/log/out.log"]
+      volumeMounts:
+      - name: logs
+        mountPath: /var/log

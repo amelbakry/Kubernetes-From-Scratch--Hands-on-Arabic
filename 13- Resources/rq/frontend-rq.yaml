@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: frontend-rq
+spec:
+  hard:
+    requests.cpu: "50m"
+    requests.memory: 100Mi
+    limits.cpu: "100m"
+    limits.memory: 200Mi
+    pods: 10

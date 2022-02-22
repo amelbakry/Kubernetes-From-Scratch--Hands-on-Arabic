@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+    env: prod
+    sev: critical
+  name: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nginx
+    spec:
+      nodeSelector:
+        zone: us-west-a
+        diskType: ssd
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}

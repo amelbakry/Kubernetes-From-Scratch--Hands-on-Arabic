@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  creationTimestamp: null
+  labels:
+    app: logging
+    env: prod
+    sev: critical
+  name: logging-agent
+spec:
+  selector:
+    matchLabels:
+      app: logging
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: logging
+    spec:
+      nodeSelector:
+        role: logging
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+      tolerations:
+        - key: "role"
+          value: "logging"
+          operator: "Equal"
+          effect: "NoSchedule"
