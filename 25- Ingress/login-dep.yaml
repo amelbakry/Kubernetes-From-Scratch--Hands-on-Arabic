@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: login
+  labels:
+    app: login
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: login
+  template:
+    metadata:
+      labels:
+        app: login
+    spec:
+      containers:
+      - name: login
+        image: hashicorp/http-echo
+        args:
+          - "-text=Hey, This is the login service"
+        ports:
+        - containerPort: 5678
+        env:
+         - name: app
+           value: "login"

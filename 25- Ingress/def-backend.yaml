@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: default-backend
+  labels:
+    app: default-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: default-backend
+  template:
+    metadata:
+      labels:
+        app: default-backend
+    spec:
+      containers:
+      - name: default-backend
+        image: hashicorp/http-echo
+        args:
+          - "-text=Hey, This is the default-backend service"
+        ports:
+        - containerPort: 5678
+        env:
+         - name: app
+           value: "default-backend"
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: default-backend
+spec:
+  selector:
+    app: default-backend
+  ports:
+    - port: 8080
+      targetPort: 5678

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog
+  labels:
+    app: catalog
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: catalog
+  template:
+    metadata:
+      labels:
+        app: catalog
+    spec:
+      containers:
+      - name: catalog
+        image: hashicorp/http-echo
+        args:
+          - "-text=Hey, This is the catalog service"
+        ports:
+        - containerPort: 5678
+        env:
+         - name: app
+           value: "catalog"
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: catalog
+spec:
+  selector:
+    app: catalog
+  ports:
+    - port: 8080
+      targetPort: 5678

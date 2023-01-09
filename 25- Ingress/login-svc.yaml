@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: login
+spec:
+  selector:
+    app: login
+  ports:
+    - port: 8080
+      targetPort: 5678
